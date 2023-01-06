@@ -1,2 +1,2 @@
 # Automacao-PPT
-Automação criada para colocar vários nomes em vários espaços distintos para impressão.
+Este script foi criado para automatizar a criação de arquivos de apresentação power point a partir de dados em excel.
