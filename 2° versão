@@ -1,0 +1,108 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[52]:
+
+
+from pptx import Presentation
+from pptx.util import Inches
+import win32com.client
+import os
+from pptx.util import Pt
+import pandas as pd
+
+
+# In[73]:
+
+
+#Pegando os dados a partir da planilha
+info = pd.read_excel(r'C:\Users\120320\Downloads\Graviola.xlsx')
+
+
+# In[74]:
+
+
+len(info)
+
+
+# In[75]:
+
+
+info.head()
+
+
+# In[76]:
+
+
+info.tail()
+
+
+# In[77]:
+
+
+#Adicionando texto a partir do modelo para etiqueta
+apr = Presentation(r'C:\Users\120320\Desktop\Pessoal\Lumen\Impressão\Apresentação1.pptx')
+
+
+# In[78]:
+
+
+info['Nome:']
+
+
+# In[79]:
+
+
+info['complete'] = info['Nome:']+ "                                                                " + info['Código']
+
+
+# In[80]:
+
+
+info['complete']
+
+
+# In[81]:
+
+
+a=0
+b=0
+c=0
+while c<10:
+    slide = apr.slides[a]
+    for shape in slide.shapes:
+        if not shape.has_text_frame:
+            continue
+        text_frame = shape.text_frame
+        text_frame.clear()
+        p = text_frame.paragraphs[0]
+        
+        run = p.add_run()
+        run.text = info['complete'].iloc[b]
+        
+        font = run.font
+        font.name = 'Calibri'
+        font.size = Pt(12)
+        b+=1
+        c+=1
+    a+=1
+
+
+# In[83]:
+
+
+apr.save(r'C:\Users\120320\Desktop\Pessoal\Lumen\Impressão\ppt_Graviola.pptx')
+os.startfile(r'C:\Users\120320\Desktop\Pessoal\Lumen\Impressão\ppt_Graviola.pptx')
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
